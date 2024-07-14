@@ -95,5 +95,56 @@ class CurrencyServiceTest {
 
             assertEquals("Service unavailable", exception.getMessage());
         }
+
+        @Test
+        @DisplayName("It should throw InvalidParameterException when fromCurrency is null or empty")
+        void convertShouldThrowExceptionWhenFromCurrencyIsNullOrEmpty() {
+            BigDecimal amount = BigDecimal.valueOf(100);
+            String nullCurrency = null;
+            String emptyCurrency = "";
+
+            InvalidParameterException nullException = assertThrows(InvalidParameterException.class, () ->
+                    currencyService.convert(amount, nullCurrency, "EUR")
+            );
+
+            assertEquals("The fromCurrency must not be null", nullException.getMessage());
+
+            InvalidParameterException emptyException = assertThrows(InvalidParameterException.class, () ->
+                    currencyService.convert(amount, emptyCurrency, "EUR")
+            );
+
+            assertEquals("The fromCurrency () must not be blank", emptyException.getMessage());
+        }
+
+        @Test
+        @DisplayName("It should throw InvalidParameterException when toCurrency is null or empty")
+        void convertShouldThrowExceptionWhenToCurrencyIsNullOrEmpty() {
+            BigDecimal amount = BigDecimal.valueOf(100);
+            String nullCurrency = null;
+            String emptyCurrency = "";
+
+            InvalidParameterException nullException = assertThrows(InvalidParameterException.class, () ->
+                    currencyService.convert(amount, "USD", nullCurrency)
+            );
+
+            assertEquals("The toCurrency must not be null", nullException.getMessage());
+
+            InvalidParameterException emptyException = assertThrows(InvalidParameterException.class, () ->
+                    currencyService.convert(amount, "USD", emptyCurrency)
+            );
+
+            assertEquals("The toCurrency () must not be blank", emptyException.getMessage());
+        }
+
+        @Test
+        @DisplayName("It should return the same amount when fromCurrency and toCurrency are the same")
+        void convertShouldReturnSameAmountWhenCurrenciesAreSame() {
+            BigDecimal amount = BigDecimal.valueOf(100);
+            String currency = "USD";
+
+            BigDecimal result = currencyService.convert(amount, currency, currency);
+
+            assertEquals(amount, result);
+        }
     }
 }

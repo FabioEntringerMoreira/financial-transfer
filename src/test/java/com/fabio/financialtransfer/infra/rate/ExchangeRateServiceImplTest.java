@@ -45,7 +45,7 @@ class ExchangeRateServiceImplTest {
         @Test
         @DisplayName("It should return exchange rate successfully")
         void getExchangeRateShouldReturnSuccessfully() {
-            ExchangeRateResponse response = new ExchangeRateResponse(new BigDecimal("0.85"));
+            ExchangeRateResponse response = new ExchangeRateResponse("", "", "", new BigDecimal("0.85"));
 
             when(restTemplate.getForObject(apiUrlFormatted, ExchangeRateResponse.class)).thenReturn(response);
 

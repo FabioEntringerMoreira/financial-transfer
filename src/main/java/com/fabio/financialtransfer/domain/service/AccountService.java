@@ -38,7 +38,7 @@ public class AccountService {
      * @return {@link Account} the account
      * @throws ObjectNotFoundException if the account is not found
      */
-    public Account getAccount(@Nonnull final Long accountId) {
+    public Account getAccountById(@Nonnull final Long accountId) {
         ValidationUtils.validateNonNull(accountId, "accountId");
 
         return accountRepository.findById(accountId)
@@ -54,7 +54,7 @@ public class AccountService {
         ValidationUtils.validateNonNull(transferTO, "transferTO");
 
         Account debitAccount = getAccountWithCheckedBalance(transferTO.getDebitAccountId(), transferTO.getAmount());
-        Account creditAccount = getAccount(transferTO.getCreditAccountId());
+        Account creditAccount = getAccountById(transferTO.getCreditAccountId());
 
         BigDecimal amountInTargetCurrency = currencyService.convert(transferTO.getAmount(), debitAccount.getCurrency(), creditAccount.getCurrency());
 
@@ -75,7 +75,7 @@ public class AccountService {
         ValidationUtils.validateIdentifier(accountId, "accountId");
         ValidationUtils.validatePositive(amountToWithdraw, "withdrawAmount");
 
-        Account debitAccount = getAccount(accountId);
+        Account debitAccount = getAccountById(accountId);
         AccountValidator.validateSufficientBalance(debitAccount.getBalance(), amountToWithdraw);
         return debitAccount;
     }

@@ -21,6 +21,6 @@ public class InvalidParameterException extends TechnicalException {
      * @param message the detail message explaining why the parameter is invalid.
      */
     public InvalidParameterException(final String paramName, final Object paramValue, final String message) {
-        super("The " + paramName + " (" + paramValue + ") " + message);
+        super(String.format("The %s (%s) %s", paramName, paramValue, message));
     }
 }

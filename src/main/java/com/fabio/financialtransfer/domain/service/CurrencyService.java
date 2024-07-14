@@ -1,6 +1,7 @@
 package com.fabio.financialtransfer.domain.service;
 
 import com.fabio.financialtransfer.domain.dto.ExchangeRateResponse;
+import com.fabio.financialtransfer.domain.exception.InvalidParameterException;
 import com.fabio.financialtransfer.domain.util.ValidationUtils;
 import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,14 @@ public class CurrencyService {
      * @param fromCurrency the currency code of the source currency
      * @param toCurrency the currency code of the target currency
      * @return the converted amount in the target currency, scaled to {@link #DEFAULT_SCALE}
-     * @throws IllegalArgumentException if the amount is null or if any validation fails
+     * @throws InvalidParameterException if the amount is negative, null, or if any currency validation fails
      */
     public BigDecimal convert(@Nonnull final BigDecimal amount, final String fromCurrency, final String toCurrency) {
-        ValidationUtils.validateNonNull(amount, "Amount");
+        ValidationUtils.validateNonNegative(amount, "Amount");
+        ValidationUtils.validateNonBlank(fromCurrency, "fromCurrency");
+        ValidationUtils.validateNonBlank(toCurrency, "toCurrency");
 
-        if (amount.compareTo(BigDecimal.ZERO) == 0) {
+        if (amount.compareTo(BigDecimal.ZERO) == 0 || fromCurrency.equals(toCurrency)) {
             return amount;
         }
 

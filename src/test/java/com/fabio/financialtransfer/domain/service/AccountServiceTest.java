@@ -45,7 +45,7 @@ class AccountServiceTest {
             Long accountId = null;
 
             InvalidParameterException exception = assertThrows(InvalidParameterException.class, () ->
-                    accountService.getAccount(accountId)
+                    accountService.getAccountById(accountId)
             );
 
             assertEquals("The accountId must not be null", exception.getMessage());
@@ -61,7 +61,7 @@ class AccountServiceTest {
             Account account = new Account(accountId, currency, balance);
             when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
-            Account result = accountService.getAccount(accountId);
+            Account result = accountService.getAccountById(accountId);
 
             assertAll("account",
                     () -> assertNotNull(result, "The account should not be null"),
@@ -78,7 +78,7 @@ class AccountServiceTest {
             when(accountRepository.findById(accountId)).thenReturn(Optional.empty());
 
             ObjectNotFoundException exception = assertThrows(ObjectNotFoundException.class, () ->
-                    accountService.getAccount(accountId)
+                    accountService.getAccountById(accountId)
             );
 
             assertEquals("Account not found for id: " + accountId, exception.getMessage());

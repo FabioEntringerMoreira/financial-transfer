@@ -34,15 +34,6 @@ public final class ExchangeRateResponse {
     }
 
     /**
-     * Constructor.
-     * Other fields are set to null.
-     * @param conversionRate the conversion rate from the base currency to the target currency
-     */
-    public ExchangeRateResponse(final BigDecimal conversionRate) {
-        this(null, null, null, conversionRate);
-    }
-
-    /**
      * Gets the result status of the exchange rate query.
      * @return the result status
      */

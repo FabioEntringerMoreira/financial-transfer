@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "7ac5fc77-b3fa-49c7-962e-e685a944dd07",
+		"name": "Financial transfer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10690089"
+	},
+	"item": [
+		{
+			"name": "transfer-valid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": 2,\r\n  \"amount\": 250.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-accounts-same-id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": 1,\r\n  \"amount\": 250.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-debit-account-null-id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": null,\r\n  \"creditAccountId\": 1,\r\n  \"amount\": 250.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-credit-account-null-id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": null,\r\n  \"amount\": 250.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-not-managed-currency",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": 10,\r\n  \"amount\": 250.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-null-amount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": 10,\r\n  \"amount\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-negative-amount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": 10,\r\n  \"amount\": -10.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		},
+		{
+			"name": "transfer-insufficient-balance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"debitAccountId\": 1,\r\n  \"creditAccountId\": 10,\r\n  \"amount\": 1500.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/transfer"
+			},
+			"response": []
+		}
+	]
+}

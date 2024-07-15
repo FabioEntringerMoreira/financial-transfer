@@ -58,7 +58,7 @@ These instructions will get you a copy of the project up and running on your loc
    ```
 3. Install the necessary dependencies using Maven:
    ```sh
-   mvn install
+   mvn clean install
    ```
 
 ## Running the Application

@@ -60,6 +60,7 @@ These instructions will get you a copy of the project up and running on your loc
    ```sh
    mvn clean install
    ```
+**The last version of the API is available on 'master' branch**
 
 ## Running the Application
 

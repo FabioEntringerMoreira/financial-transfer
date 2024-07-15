@@ -54,7 +54,7 @@ These instructions will get you a copy of the project up and running on your loc
    ```
 2. Navigate to the project directory:
    ```sh
-   cd financial-transfer-api
+   cd financial-transfer
    ```
 3. Install the necessary dependencies using Maven:
    ```sh
